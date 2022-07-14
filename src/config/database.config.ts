@@ -12,7 +12,6 @@ export default () => {
       database: DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      aaaaa: 1,
     } as TypeOrmModuleOptions,
   };
 };

@@ -18,7 +18,7 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
-    console.log('context:', context);
+    // console.log('context:', context);
 
     return next
       .handle()

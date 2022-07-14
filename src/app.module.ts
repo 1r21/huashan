@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import databaseConfig from './config/database.config';
 import { AppController } from './app.controller';
@@ -10,7 +10,7 @@ import { ArticlesModule } from './articles/articles.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.local',
+      envFilePath: ['.env', '.env.local',],
       load: [databaseConfig],
     }),
     TypeOrmModule.forRootAsync({
@@ -23,4 +23,4 @@ import { ArticlesModule } from './articles/articles.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

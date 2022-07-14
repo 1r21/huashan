@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateArticleDto } from './dto/create-article.dto';
 import { Article } from './article.entity';
 
 @Injectable()
@@ -9,23 +8,28 @@ export class ArticlesService {
   constructor(
     @InjectRepository(Article)
     private readonly articlesRepository: Repository<Article>,
-  ) {}
+  ) { }
 
-  create(createUserDto: CreateArticleDto): Promise<Article> {
-    const article = new Article();   
-    article.title = createUserDto.title;
-    return this.articlesRepository.save(article);
+  async getArticleTotal() {
+    return this.articlesRepository.count();
   }
 
-  async findAll(): Promise<Article[]> {
-    return this.articlesRepository.find();
+  // skip => offset, take => limit
+  async findAll(take: number, skip: number,) {
+    return this.articlesRepository.find({
+      order: {
+        id: 'DESC',
+      },
+      skip,
+      take
+    });
   }
 
-  findOne(id: string): Promise<Article> {
+  async findOne(id: number) {
     return this.articlesRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number) {
     await this.articlesRepository.delete(id);
   }
 }
