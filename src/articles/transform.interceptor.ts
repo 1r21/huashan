@@ -22,6 +22,6 @@ export class TransformInterceptor<T>
 
     return next
       .handle()
-      .pipe(map((data) => ({ code: 0, data, message: 'success' })));
+      .pipe(map((data) => ({ code: 0, message: 'success', data, })));
   }
 }

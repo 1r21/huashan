@@ -26,7 +26,7 @@ export class ArticlesService {
   }
 
   async findOne(id: number) {
-    return this.articlesRepository.findOne(id);
+    return this.articlesRepository.findOneBy({ id });
   }
 
   async remove(id: number) {
